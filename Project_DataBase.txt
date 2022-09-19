@@ -1,20 +1,25 @@
-ALTER SESSION SET "_ORACLE_SCRIPT"=true;
- 
-CREATE USER project IDENTIFIED BY project;
+https://www.bezkoder.com/
 
+
+ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+CREATE USER MGSproject IDENTIFIED BY MGSproject;
 GRANT CONNECT,DBA TO project;
 
+ 
+ commit;
+ 
 
 
+-------------------------------------------------------------------------------------------------------------------------
 
-select * from login_details;
+select * from  login_details  ;
 select * from project_details;
 select * from employee_details;
 select * from job_description_details;
-select * from document_details;  
+select * from document_details;
 select * from applicant_details;
+select * from employee_details;
 select * from interviewer_details;
-
 
 drop table login_details;
 drop table project_details;
@@ -24,13 +29,15 @@ drop table document_details;
 drop table applicant_details;
 drop table interviewer_details;
 
+drop sequence LoginSequencesSeries; 
+drop sequence project_sequencesseries;
+drop sequence Employee_Id_sequence_Series;
+drop sequence job_id_sequence_series; 
+drop sequence document_details_sequence_series;
+drop sequence applicant_id_sequence_series;
+drop sequence interviewer_table_sequence_series;
 
- 
-drop sequence address_details_sequence; 
-drop sequence employee_details_sequence;
-drop sequence interviewer_table_sequence;
-
-
+=========================================================
 
 -- login_details
     create table login_details(
@@ -41,10 +48,41 @@ drop sequence interviewer_table_sequence;
     constraint login_id_pk primary key(login_id)
 );
 
- create sequence LoginSequences
- start with 101 increment by 1;
-
---project_details
+create sequence  LoginSequencesSeries
+ start with 11 increment by 1;
+ 
+ 
+ 
+insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS81','pandey','Developer');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS82','vishaka12','HR');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS83','98iuy6','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS84','as@gt34','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS85','pandey144','Interviewer');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS86','pand1','PM');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS87','ndey11','PM');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS88','pan_4','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS89','an4','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS90','pan4987','Developer');
+ insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS91','p_ey','Developer');
+ insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS92','pan21','Developer');
+ 
+  ============================================================================================
+ 
+ 
+ 
+ --project_details
 
     create table project_details(
     project_id varchar2(10),
@@ -53,10 +91,24 @@ drop sequence interviewer_table_sequence;
     constraint project_id_pk primary key(project_id)
  );
  
- create sequence projectsequences
- start with 300 increment by 1;
+ create sequence project_sequencesseries
+ start with 100 increment by 1;
  
---employee_details
+ 
+ 
+ insert into project_details
+values( project_sequencesseries.NEXTVAL,'InsurenceProject',9876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'BankingProject',11876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'AirLineProject',2876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'On Bench',0);
+
+==========================================================================================
+
+
+-employee_details
 
     create table employee_details(
     Employee_Id Number(10),
@@ -65,19 +117,49 @@ drop sequence interviewer_table_sequence;
     Project_Id VARCHAR2(10),
     Designation VARCHAR2(20) NOT NULL,
     Login_Id NUMBER(4),
-    MGR NUMBER(10)NOT NULL,
+    MGR NUMBER(10),
+    Skill_1 VARCHAR2(50),
+     Skill_2 VARCHAR2(50),
+      Skill_3 VARCHAR2(50),
     Status VARCHAR2(20)NOT NULL,
     CONSTRAINT Employee_Id_pk PRIMARY KEY(Employee_Id),
     CONSTRAINT Project_Id_fk FOREIGN KEY(Project_Id) REFERENCES project_details(Project_Id),
     CONSTRAINT Login_Id_fk FOREIGN KEY(Login_Id) REFERENCES login_details(Login_Id)
 );
 
+create sequence Employee_Id_sequence_Series
+start with 1003 increment by 1;
 
+TRUNCATE TABLE employee_details;
 
-create sequence Employee_Id_sequence
-start with 1 increment by 1;
+-- insert into employee_details
+-- values( Employee_Id_sequence_Series.NEXTVAL,'Anjali Pandey',2000000,100,'developer',1000,1002,'java','sql','database','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Ajay',2000000,100,'PM',11,NULL,'java','sql','database','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Dinesh',40000,100,'TL',13,1003,'java','database','sql','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Ashish',2000000,100,'TL',14,1003,'database','sql','java','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Vipul',2000000,101,'PM',17,NULL,'database','sql','java','Working');
+   insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Anjali',2000000,101,'TL',18,1006,'database','sql','java','Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Yash',2000000,101,'TL',19,1006,'database','sql','java','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'gagan',2000000,102,'Interviewer',15,1003,'database','sql','java','Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Sayali',20000,103,'Developer',32,NULL,'JAVA Core','SQL','SPRING','Not-Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Kavita',40000,103,'Developer',33,NULL,'JAVA Core','SQL','SPRING','Not-Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Gagan',400000,103,'Developer',11,NULL,'java++','sql','database','Working');
+ 
+ 
 
---job_description_details
+ ==============================================================================================================================================
+ 
+  --job_description_details
 
     create table job_description_details (
     job_id number(10) ,
@@ -85,20 +167,33 @@ start with 1 increment by 1;
     skill_1 varchar(50),
     skill_2 varchar(50),
     skill_3 varchar(50),
+    project_id varchar2(10),
     job_status varchar(50),
+    Required_candidate Number(30),
     constraint job_id_pk primary key(job_id),
-    constraint employee_id_fk foreign key(employee_id) references employee_details(employee_id)
+    constraint employee_id_fk foreign key(employee_id) references employee_details(employee_id),
+    constraint job_status_ck Check(job_status in ('Approved','Rejected','Pending')),
+    constraint projectid_fk foreign key(project_id)references project_details(project_id)
 );
 
-
+create sequence job_id_sequence_series
+ start with 500 increment by 1;
  
- create sequence job_id_sequence
- start with 101 increment by 1;
-
+ 
  insert into job_description_details
- values(job_id_sequence.NEXTVAL,1,'M.G.Road','Mumbai',400012);
- 
- 
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',100,'Pending',0); 
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',100,'Pending',10);
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1005,'JAVA','SQL','SPRINGBoot',100,'Pending',15); 
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1007,'Core','SQL','SPRING',101,'Pending',12);
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1008,'JAVA Core','SQL','SPRINGMVC',101,'Pending',5);
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',103,'Pending',10);
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1007,'eng','boot','sql',101,'Pending',0);
 
 -- document_details
  
@@ -109,11 +204,27 @@ start with 1 increment by 1;
      document_file blob null,
      constraint document_id_pk primary key(document_id)
  );
- create sequence document_details_sequence
- start with 10001 increment by 1;
+ create sequence document_details_sequence_series
+ start with 50 increment by 1;
  
  
---applicant_details
+ insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Addhar Card','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Pen Card','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Resume Card','Doc','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Passport','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Photo Card','Jpg','');
+ 
+ 
+ =========================================================================
+ 
+ 
+ 
+ ---applicant_details
     create table applicant_details(
     applicant_id number(4) ,
     applicant_name varchar(20) not null,
@@ -121,7 +232,7 @@ start with 1 increment by 1;
     skill_1 varchar(50),
     skill_2 varchar(50),
     skill_3 varchar(50),
-    contact number(10) not null,
+    contact varchar(50) not null,
     document_id number(10) ,
     job_id number(10),
     constraint applicant_id_pk primary key (applicant_id),
@@ -130,16 +241,37 @@ start with 1 increment by 1;
     constraint document_id_fk foreign key(document_id) references document_details(document_id)
 );
  
- create sequence applicant_id_sequence
+ create sequence applicant_id_sequence_series
  start with 1 increment by 1;
  
---interviewer_details
+ 
+ 
+ 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Shivam','B.Tech','Java','SQL','DJANGO','7905270920', 50,500); 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Shruti','B.Com','Account','Maths','sheet','7905270920', 52,501);
+ insert into applicant_details
+values(applicant_id_sequence_series.NEXTVAL,'Lucky','B.A','lit','SQL','sql','7905270920', 51,503);
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'kRISHNA','Medical','Java','Maths','Logic','7905270920', 54,502);
+insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Rahul','EE','JAVA Core','SQL','SPRING','7905270920', 54,500);
+ 
+ 
+ 
+ 
+ 
+ 
+ --interviewer_details
+    
     create table interviewer_details(
+    interview_id number(10) not null,
     applicant_id number(4) not null,
     employee_id number(10) not null,
     status varchar(50) not null,
-    feedback varchar(50) not null,
-    interview_id number(10) not null,
+    
+   
     round_1 number(4) not null,
     round_2 number(4) not null,
     round_3 number(4) not null,
@@ -148,107 +280,27 @@ start with 1 increment by 1;
     constraint employeeid_fk foreign key(employee_id) references employee_details(employee_id)
 );
  
- create sequence interviewer_table_sequence
- start with 10001 increment by 1;
+ create sequence interviewer_table_sequence_series
+ start with 20 increment by 1;
 
-
-
-
-ALTER TABLE job_description_details 
-DROP COLUMN job_status;
-
-ALTER TABLE job_description_details 
-COLUMN job_status;
-
-ALTER TABLE job_description_details
-ADD CONSTRAINT job_status_Ck
-CHECK (job_status IN ('Approved', 'Rejected'));
-
-ALTER TABLE employee_details
-ADD CONSTRAINT status_Ck CHECK ( status IN ('Working','Not_Working'));
-
-ALTER TABLE interviewer_details
-ADD CONSTRAINT interviewer_status_Ck CHECK (status IN ('Pass','Fail'));
-
-insert into login_details
- values( Login_Id_sequences.NEXTVAL,'MGS81','pandey','Developer');
- insert into login_details
- values( Login_Id_sequences.NEXTVAL,'MGS82','vishaka12','HR');
- insert into login_details
- values( Login_Id_sequences.NEXTVAL,'MGS83','98iuy6','TL1');
- insert into login_details
- values( Login_Id_sequences.NEXTVAL,'MGS84','as@gt34','TL2');
- insert into login_details
- values( Login_Id_sequences.NEXTVAL,'MGS85','pandey11','Interviewer');
-
-
-insert into project_details
-values( projectSequences.NEXTVAL,'InsurenceProject',9876665);
-insert into project_details
-values( projectSequences.NEXTVAL,'BankingProject',11876665);
-insert into project_details
-values( projectSequences.NEXTVAL,'AirLineProject',2876665);
-insert into project_details
-values( projectSequences.NEXTVAL,'On Bench',0);
-
-
- insert into employee_details
- values( Employee_Id_sequence.NEXTVAL,'Anjali Pandey',2000000,311,'developer',111,102,'Working');
- insert into employee_details
- values( Employee_Id_sequence.NEXTVAL,'Ajay',2000000,308,'HR',112,104,'Working');
- insert into employee_details
- values( Employee_Id_sequence.NEXTVAL,'Ashish',2000000,310,'Interviewer',115,102,'Working');
- insert into employee_details
- values( Employee_Id_sequence.NEXTVAL,'Dinesh',40000,309,'TL1',113,102,'Working');
- insert into employee_details
- values( Employee_Id_sequence.NEXTVAL,'Ashish',2000000,309,'TL2',114,102,'Working');
-
-
-
-insert into job_description_details
-values(Job_Id_sequence.NEXTVAL,32,'JAVA Core','SQL','SPRING','Approved');
-insert into job_description_details
-values(Job_Id_sequence.NEXTVAL,32,'JAVA','SQL','SPRINGBoot','Approved'); 
-insert into job_description_details
-values(Job_Id_sequence.NEXTVAL,33,'Core','SQL','SPRING','Rejected');
-insert into job_description_details
-values(Job_Id_sequence.NEXTVAL,33,'JAVA Core','SQL','SPRINGMVC','Approved');
-
-
-
-insert into document_details
-values( document_details_sequence.NEXTVAL,'Addhar Card','Pdf','');
-insert into document_details
-values( document_details_sequence.NEXTVAL,'Pen Card','Pdf','');
-insert into document_details
-values( document_details_sequence.NEXTVAL,'Resume Card','Doc','');
-insert into document_details
-values( document_details_sequence.NEXTVAL,'Passport','Pdf','');
-insert into document_details
-values( document_details_sequence.NEXTVAL,'Photo Card','Jpg','');
-
-
- insert into applicant_details
- values(Applicant_Id_sequence.NEXTVAL,'Shivam','B.Tech','Java','SQL','DJANGO',7905270920, 10012,110); 
- insert into applicant_details
- values(Applicant_Id_sequence.NEXTVAL,'Shruti','B.Com','Account','Maths','sheet',7905270920, 10013,111);
- insert into applicant_details
-values(Applicant_Id_sequence.NEXTVAL,'Lucky','B.A','lit','SQL','sql',7905270920, 10014,112);
- insert into applicant_details
- values(Applicant_Id_sequence.NEXTVAL,'kRISHNA','Medical','Java','Maths','Logic',7905270920, 10015,113);
 
 insert into interviewer_details
-values( 6,32,'Pass','Good',interviewer_table_sequence.NEXTVAL,8,6,7);
+values(interviewer_table_sequence_series.NEXTVAL, 1,1009,'Pass',8,6,7);
 insert into interviewer_details
-values( 7,33,'Fail','poor',interviewer_table_sequence.NEXTVAL,8,5,7);
+values( interviewer_table_sequence_series.NEXTVAL,2,1009,'Fail',8,5,7);
 insert into interviewer_details
-values( 8,33,'Pass','Good',interviewer_table_sequence.NEXTVAL,8,5,8);
+values(interviewer_table_sequence_series.NEXTVAL, 3,1009,'Pass',8,5,8);
 insert into interviewer_details
-values( 5,32,'Pass','Good',interviewer_table_sequence.NEXTVAL,8,6,7);
+values(interviewer_table_sequence_series.NEXTVAL, 4,1009,'Pass',8,6,7);
 
 
 
-UPDATE employee_details
+commit;
+ 
+ 
+ ==================================================================================================================
+ 
+ UPDATE employee_details
 SET SKILL_1 = 'SpringBoot', SKILL_2 = 'sql',SKILL_3 = 'SpringBoot'
 WHERE  Employee_Id = 29;
 
@@ -267,5 +319,363 @@ WHERE  Employee_Id = 32;
 UPDATE employee_details
 SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
 WHERE  Employee_Id = 33;
+ 
+ 
+ ALTER TABLE Applicant_details
+ADD status varchar2(20);
+Rejected
+ send offer letter
+Hired
+
+
+Final database
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+CREATE USER MGSproject IDENTIFIED BY MGSproject;
+GRANT CONNECT,DBA TO project;
+
+ 
+ commit;
+ 
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+select * from  login_details  ;
+select * from project_details;
+select * from employee_details;
+select * from job_description_details;
+select * from document_details;
+select * from applicant_details;
+select * from employee_details;
+select * from interviewer_details;
+
+drop table login_details;
+drop table project_details;
+drop table employee_details;
+drop table job_description_details;
+drop table document_details;
+drop table applicant_details;
+drop table interviewer_details;
+
+drop sequence LoginSequencesSeries; 
+drop sequence project_sequencesseries;
+drop sequence Employee_Id_sequence_Series;
+drop sequence job_id_sequence_series; 
+drop sequence document_details_sequence_series;
+drop sequence applicant_id_sequence_series;
+drop sequence interviewer_table_sequence_series;
+
+=========================================================
+
+-- login_details
+    create table login_details(
+    login_id number(4) ,
+    user_id varchar(20) not null,
+    password varchar2(15) not null,
+    designation varchar2(30) not null,
+    constraint login_id_pk primary key(login_id)
+);
+
+create sequence  LoginSequencesSeries
+ start with 11 increment by 1;
+ 
+ TRUNCATE TABLE login_details;
+
+ 
+insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS81','pandey','Developer');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS82','vishaka12','HR');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS83','98iuy6','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS84','as@gt34','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS85','pandey144','Interviewer');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS86','pand1','PM');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS87','ndey11','PM');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS88','pan_4','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS89','an4','TL');
+ insert into login_details
+ values( LoginSequencesSeries.NEXTVAL,'MGS90','pan4987','Developer');
+ insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS91','p_ey','Developer');
+ insert into login_details
+ values(LoginSequencesSeries.NEXTVAL,'MGS92','pan21','Developer');
+ 
+  ============================================================================================
+ 
+ 
+ 
+ --project_details
+
+    create table project_details(
+    project_id varchar2(10),
+    project_name varchar2(20),
+    project_cost number(10,2),
+    constraint project_id_pk primary key(project_id)
+ );
+ 
+ create sequence project_sequencesseries
+ start with 100 increment by 1;
+ 
+ 
+ 
+ insert into project_details
+values( project_sequencesseries.NEXTVAL,'InsurenceProject',9876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'BankingProject',11876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'AirLineProject',2876665);
+insert into project_details
+values( project_sequencesseries.NEXTVAL,'On Bench',0);
+
+==========================================================================================
+
+
+-employee_details
+
+    create table employee_details(
+    Employee_Id Number(10),
+    Ename VARCHAR(20) NOT NULL,
+    Salary NUMBER(10,2)NOT NULL,
+    Project_Id VARCHAR2(10),
+    Designation VARCHAR2(20) NOT NULL,
+    Login_Id NUMBER(4),
+    MGR NUMBER(10),
+    Skill_1 VARCHAR2(50),
+     Skill_2 VARCHAR2(50),
+      Skill_3 VARCHAR2(50),
+    Status VARCHAR2(20)NOT NULL,
+    CONSTRAINT Employee_Id_pk PRIMARY KEY(Employee_Id),
+    CONSTRAINT Project_Id_fk FOREIGN KEY(Project_Id) REFERENCES project_details(Project_Id),
+    CONSTRAINT Login_Id_fk FOREIGN KEY(Login_Id) REFERENCES login_details(Login_Id)
+);
+
+create sequence Employee_Id_sequence_Series
+start with 1003 increment by 1;
+
+TRUNCATE TABLE employee_details;
+
+-- insert into employee_details
+-- values( Employee_Id_sequence_Series.NEXTVAL,'Anjali Pandey',2000000,100,'developer',1000,1002,'java','sql','database','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Ajay',2000000,100,'PM',11,NULL,'java','sql','database','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Dinesh',40000,100,'TL',13,1003,'java','database','sql','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Ashish',2000000,100,'TL',14,1003,'database','sql','java','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Vipul',2000000,101,'PM',17,NULL,'database','sql','java','Working');
+   insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Anjali',2000000,101,'TL',18,1006,'database','sql','java','Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Yash',2000000,101,'TL',19,1006,'database','sql','java','Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'gagan',2000000,102,'Interviewer',15,1003,'database','sql','java','Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Sayali',20000,103,'Developer',20,NULL,'JAVA Core','SQL','SPRING','Not-Working');
+ insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Kavita',40000,103,'Developer',21,NULL,'JAVA Core','SQL','SPRING','Not-Working');
+  insert into employee_details
+ values( Employee_Id_sequence_Series.NEXTVAL,'Gagan',400000,103,'Developer',22,NULL,'java++','sql','database','Working');
+ 
+ 
+
+ ==============================================================================================================================================
+ 
+  --job_description_details
+
+    create table job_description_details (
+    job_id number(10) ,
+    employee_id number(10),
+    skill_1 varchar(50),
+    skill_2 varchar(50),
+    skill_3 varchar(50),
+    project_id varchar2(10),
+    job_status varchar(50),
+    Required_candidate Number(30),
+    constraint job_id_pk primary key(job_id),
+    constraint employee_id_fk foreign key(employee_id) references employee_details(employee_id),
+    constraint job_status_ck Check(job_status in ('Approved','Rejected','Pending')),
+    constraint projectid_fk foreign key(project_id)references project_details(project_id)
+);
+
+create sequence job_id_sequence_series
+ start with 500 increment by 1;
+ 
+ 
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',100,'Pending',0); 
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',100,'Pending',10);
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1005,'JAVA','SQL','SPRINGBoot',100,'Pending',15); 
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1007,'Core','SQL','SPRING',101,'Pending',12);
+insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1008,'JAVA Core','SQL','SPRINGMVC',101,'Pending',5);
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1004,'JAVA Core','SQL','SPRING',103,'Pending',10);
+ insert into job_description_details
+values(job_id_sequence_series.NEXTVAL,1007,'eng','boot','sql',101,'Pending',0);
+
+-- document_details
+ 
+     create table document_details(
+     document_id number(10),
+     document_type varchar(50) not null,
+     document_formate varchar(50) not null,
+     document_file blob null,
+     constraint document_id_pk primary key(document_id)
+ );
+ create sequence document_details_sequence_series
+ start with 50 increment by 1;
+ 
+ 
+ insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Addhar Card','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Pen Card','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Resume Card','Doc','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Passport','Pdf','');
+insert into document_details
+values( document_details_sequence_series.NEXTVAL,'Photo Card','Jpg','');
+ 
+ 
+ =========================================================================
+ 
+ 
+ 
+ ---applicant_details
+    create table applicant_details(
+    applicant_id number(4) ,
+    applicant_name varchar(20) not null,
+    qualification varchar2(15) not null,
+    skill_1 varchar(50),
+    skill_2 varchar(50),
+    skill_3 varchar(50),
+    contact varchar(50) not null,
+    document_id number(10) ,
+    job_id number(10),
+    constraint applicant_id_pk primary key (applicant_id),
+
+    constraint job_id_fk foreign key(job_id) references job_description_details(job_id),
+    constraint document_id_fk foreign key(document_id) references document_details(document_id)
+);
+ 
+ create sequence applicant_id_sequence_series
+ start with 1 increment by 1;
+ 
+  ALTER TABLE Applicant_details
+ADD status varchar2(20);
+ 
+ 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Shivam','B.Tech','Java','SQL','DJANGO','7905270920', 50,500); 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Shruti','B.Com','Account','Maths','sheet','7905270920', 52,501);
+ insert into applicant_details
+values(applicant_id_sequence_series.NEXTVAL,'Lucky','B.A','lit','SQL','sql','7905270920', 51,503);
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'kRISHNA','Medical','Java','Maths','Logic','7905270920', 54,502);
+insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Rahul','EE','JAVA Core','SQL','SPRING','7905270920', 54,500);
+insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Gaurav','EE','JAVA Core','SQL','SPRING','7905270920', 54,500,'Hired'); 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Ravi','EE','JAVA Core','SQL','SPRING','7905270920', 54,500,'selected');
+insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Gaurav','EE','JAVA Core','SQL','SPRING','7905270920', 54,500,'Applied'); 
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Ravi','EE','JAVA Core','SQL','SPRING','7905270920', 54,500,'In Process');
+ insert into applicant_details
+ values(applicant_id_sequence_series.NEXTVAL,'Ravi','EE','JAVA Core','SQL','SPRING','7905270920', 54,500,'Approved'); 
+  
+ 
+ 
+ 
+ --interviewer_details
+    
+    create table interviewer_details(
+    interview_id number(10) not null,
+    applicant_id number(4) not null,
+    employee_id number(10) not null,
+    status varchar(50) not null,
+    
+   
+    round_1 number(4) not null,
+    round_2 number(4) not null,
+    round_3 number(4) not null,
+    constraint interview_id_pk primary key(interview_id),
+    constraint applicantid_fk foreign key(applicant_id) references applicant_details(applicant_id),
+    constraint employeeid_fk foreign key(employee_id) references employee_details(employee_id)
+);
+ 
+ create sequence interviewer_table_sequence_series
+ start with 20 increment by 1;
+
+
+insert into interviewer_details
+values(interviewer_table_sequence_series.NEXTVAL, 1,1009,'Pass',8,6,7);
+insert into interviewer_details
+values( interviewer_table_sequence_series.NEXTVAL,2,1009,'Fail',8,5,7);
+insert into interviewer_details
+values(interviewer_table_sequence_series.NEXTVAL, 3,1009,'Pass',8,5,8);
+insert into interviewer_details
+values(interviewer_table_sequence_series.NEXTVAL, 4,1009,'Pass',8,6,7);
+
+
 
 commit;
+ 
+ 
+ ==================================================================================================================
+ 
+ UPDATE employee_details
+SET SKILL_1 = 'SpringBoot', SKILL_2 = 'sql',SKILL_3 = 'SpringBoot'
+WHERE  Employee_Id = 1003;
+
+UPDATE employee_details
+SET SKILL_1 = 'SpringBoot', SKILL_2 = 'sql',SKILL_3 = 'JAVA'
+WHERE  Employee_Id = 1004;
+
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'sql',SKILL_3 = 'SpringBoot'
+WHERE  Employee_Id = 1005;
+
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'sql',SKILL_3 = 'SpringBoot'
+WHERE  Employee_Id = 1006;
+
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
+WHERE  Employee_Id = 1007;
+
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
+WHERE  Employee_Id = 1008;
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
+WHERE  Employee_Id = 1009;
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
+WHERE  Employee_Id = 1012;
+UPDATE employee_details
+SET SKILL_1 = 'JAVA', SKILL_2 = 'SpringBoot',SKILL_3 = 'sql'
+WHERE  Employee_Id = 1013;
+ 
+
+
+
+Rejected
+ send offer letter
+Hired
